@@ -9,7 +9,7 @@ pipeline {
         sh '''
           apt-get update -y
           apt-get install -y python3 python3-pip
-          pip3 install -r requirements.txt
+          pip3 install --break-system-packages -r requirements.txt
         '''
       }
     }
