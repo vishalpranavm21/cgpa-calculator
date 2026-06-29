@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  cgpa-api:
+    build: .
+    container_name: cgpa-api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    restart: unless-stopped
+
+  cgpa-jenkins:
+    image: jenkins/jenkins:lts-jdk21
+    container_name: cgpa-jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:
