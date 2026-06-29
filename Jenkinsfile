@@ -6,12 +6,16 @@ pipeline {
     }
     stage('Install Dependencies') {
       steps {
-        sh 'pip install -r requirements.txt'
+        sh '''
+          apt-get update -y
+          apt-get install -y python3 python3-pip
+          pip3 install -r requirements.txt
+        '''
       }
     }
     stage('Run Tests') {
       steps {
-        sh 'python manage.py test calculator'
+        sh 'python3 manage.py test calculator'
       }
     }
     stage('Build Docker Image') {
